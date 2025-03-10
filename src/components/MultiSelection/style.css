@@ -3,23 +3,22 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+body {
+  background: #0000004d;
+}
 #main-container {
   display: flex;
-  height: 100vh;
   justify-content: center;
   text-align: center;
   align-items: center;
   pointer-events: none;
   color: white;
-  background: gainsboro;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
-
 #inner-container {
   width: 500px;
-  /* height: auto; */
 }
-
 #enable-btn {
   background-color: darkcyan;
   color: antiquewhite;
@@ -34,7 +33,7 @@
 }
 
 #enable-btn:hover {
-  background: cadetblue;
+  background: rgba(0, 139, 139, 0.938);
   color: white;
 }
 

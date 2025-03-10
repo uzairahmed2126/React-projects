@@ -2,34 +2,49 @@ import "./style.css";
 import data from "./data";
 import React, { useState } from "react";
 function MultiSelection() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState([]);
   const [multiSelection, setMultiSelection] = useState(false);
+  const [isActive, setIsActive] = useState("Enable Multi Selection");
   function handleClick(e) {
     let target = e.target;
     if (target.id === "see-question") {
-      setSelected(target.textContent === selected ? null : target.textContent);
+      const question = target.textContent;
+      if (multiSelection) {
+        setSelected((prev) =>
+          prev.includes(question)
+            ? prev.fliter((q) => console.log(q !== question))
+            : [...prev, question]
+        );
+        console.log(selected);
+      } else {
+        setSelected((prev) => (prev.includes(question) ? [] : [question]));
+      }
+      console.log(selected);
     } else if (target.id === "enable-btn") {
-      setMultiSelection(!multiSelection);
-      //   console.log("asdfas");
+      setMultiSelection((prev) => !prev);
+      setSelected([]);
+      setIsActive((prev) =>
+        prev === "Enable Multi Selection"
+          ? "Disable Multi Selection"
+          : "Enable Multi Selection"
+      );
     }
-    console.log(selected);
   }
-  if (multiSelection) {
-    console.log(multiSelection);
-    console.log("ye");
-  }
+
   return (
     <div id="main-container" onClick={handleClick}>
       <div id="inner-container">
-        <button id="enable-btn">Enable Multi Selection</button>
+        <button id="enable-btn">{isActive}</button>
         {data && data.length > 0 ? (
           data.map(({ id, question, answer }) => (
             <div key={id} id="content">
               <div id="title">
                 <div id="see-question">{question}</div>
-                <span>+</span>
+                <span>{selected.includes(question) ? "-" : "+"}</span>
               </div>
-              {selected === question ? <div id="answer">{answer}</div> : null}
+              {selected.includes(question) ? (
+                <div id="answer">{answer}</div>
+              ) : null}
             </div>
           ))
         ) : (
@@ -40,3 +55,25 @@ function MultiSelection() {
   );
 }
 export default MultiSelection;
+
+// if (target.id === "see-question") {
+//   const question = target.textContent;
+//   if (multiSelection) {
+//     setSelected((prev) =>
+//       prev.includes(question)
+//         ? prev.filter((q) => q !== question)
+//         : [...prev, question]
+//     );
+//   } else {
+//     setSelected((prev) => (prev.includes(question) ? [] : [question]));
+//   }
+//   //   setSelected(question === selected ? null : question);
+// } else if (target.id === "enable-btn") {
+//   setMultiSelection((prev) => !prev);
+//   setSelected([]);
+//   setIsActive((prev) =>
+//     prev === "Enable Multi Selection"
+//       ? "Disable Multi Selection"
+//       : "Enable Multi Selection"
+//   );
+// }
