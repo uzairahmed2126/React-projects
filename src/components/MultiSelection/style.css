@@ -3,10 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  background: #0000004d;
-}
+
 #main-container {
+  background: #0000004d;
   display: flex;
   justify-content: center;
   text-align: center;

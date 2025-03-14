@@ -1,2 +1,3 @@
 import MultiSelection from "./MultiSelection";
-export {MultiSelection}
+import RandomColor from "./RandomColor";
+export { MultiSelection, RandomColor };
