@@ -43,7 +43,6 @@
   align-items: center;
   padding: 10px;
   margin-top: 5px;
-  /* border-radius: 5px; */
 }
 
 #see-question {
@@ -66,7 +65,3 @@ span {
   word-spacing: 2px;
   background: lightcyan;
 }
-/* #content {
-  display: flex;
-  flex-direction: column;
-} */

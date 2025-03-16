@@ -1,12 +1,9 @@
-body {
-  background: #000;
-}
 .buttons {
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
-  margin: 10px;
+  /* margin: 10px; */
 }
 .buttons > button {
   border: none;
@@ -14,14 +11,22 @@ body {
   outline: none;
   box-shadow: 1px 2px 5px 1px;
   margin: 10px;
-  background-color: #000;
-  color: aliceblue;
+  background-color: black;
+  color: white;
   border-radius: 10px;
   cursor: pointer;
+  pointer-events: auto;
+  text-transform: capitalize;
 }
 #colorContainer {
   display: flex;
+  color: white;
+  flex-direction: column;
   justify-content: center;
-  font-size: 80px;
-  padding: 120px;
+  padding: 90px;
+  gap: 70px;
+  font-size: 35px;
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  align-items: center;
 }

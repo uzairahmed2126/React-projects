@@ -1,56 +1,77 @@
-import React from "react";
 import { useState } from "react";
 import "./style.css";
 
-function RandomColor() {
-  const [randomColor, SetRandomColor] = useState("#fff");
-  function randomColorGenerator() {
-    let equation = "0123456789abcdefABCDEF";
+export default function RandomColor() {
+  const [typeOfColor, setTypeOfColor] = useState("hex");
+  const [randomColor, SetRandomColor] = useState("#000");
+  function randomColorUtility(len) {
+    let random = Math.floor(Math.random() * len);
+    return random;
+  }
+  function randomHexColorGenerator() {
+    let hex = "0123456789abcdefABCDEF";
     let color = "#";
     for (let i = 0; i < 6; i++) {
-      let random = Math.floor(Math.random(i) * equation.length);
-      color += equation[random];
+      color += hex[randomColorUtility(hex.length)];
     }
-    console.log(color);
     SetRandomColor(color);
-    return color;
+    setTypeOfColor("hex");
+  }
+  function randomRgbGenerator() {
+    const r = randomColorUtility(256);
+    const g = randomColorUtility(256);
+    const b = randomColorUtility(256);
+    SetRandomColor(`rgb(${r},${g},${b})`);
+    setTypeOfColor("rgb");
   }
   function handleClick(e) {
     e.preventDefault();
     switch (e.target.id) {
       case "HEX":
-        console.log("first");
+        randomHexColorGenerator();
         break;
       case "RGB":
-        console.log("rgb");
+        randomRgbGenerator();
         break;
       case "RANDOM":
-        randomColorGenerator();
-        document.body.style.background = randomColor;
-        console.log("random");
+        typeOfColor === "hex"
+          ? randomHexColorGenerator()
+          : randomRgbGenerator();
         break;
     }
   }
+
+  const data = [
+    { id: "HEX", text: "create hex color" },
+    { id: "RGB", text: "create rgb Color" },
+    { id: "RANDOM", text: "create random color" },
+  ];
   return (
-    <div style={{ pointerEvents: "none" }}>
+    <div
+      style={{
+        pointerEvents: "none",
+        background: randomColor,
+        height: "100vh",
+        margin: "0px",
+      }}
+    >
       <div
         className="buttons"
         style={{ pointerEvents: "none" }}
         onClick={handleClick}
       >
-        <button id="HEX" style={{ pointerEvents: "auto" }}>
-          Create HEX Color
-        </button>
-        <button id="RGB" style={{ pointerEvents: "auto" }}>
-          Create RGB Color
-        </button>
-        <button id="RANDOM" style={{ pointerEvents: "auto" }}>
-          Create Random Color
-        </button>
+        {data.map(({ id, text }) => {
+          return (
+            <button key={id} id={id}>
+              {text}
+            </button>
+          );
+        })}
       </div>
-      <div id="colorContainer">HEX:{randomColor}</div>
+      <div id="colorContainer">
+        <h3>{typeOfColor === "rgb" ? "RGB Color" : "HEX Color"}</h3>
+        <h2>{randomColor}</h2>
+      </div>
     </div>
   );
 }
-
-export default RandomColor;

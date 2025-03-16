@@ -32,7 +32,11 @@ function MultiSelection() {
   }
 
   return (
-    <div id="main-container" onClick={handleClick}>
+    <div
+      id="main-container"
+      onClick={handleClick}
+      style={{ background: "green" }}
+    >
       <div id="inner-container">
         <button id="enable-btn">{isActive}</button>
         {data && data.length > 0 ? (
